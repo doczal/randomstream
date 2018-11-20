@@ -30,3 +30,9 @@
     transform: rotate(360deg);
   }
 }
+
+.twitchEmbed {
+  width: 300px;
+  height: 540px;
+  margin: 0 auto;
+}

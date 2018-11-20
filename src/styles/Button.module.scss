@@ -1,0 +1,13 @@
+@import './globals.scss';
+
+.button {
+  background-color: $colMain;
+  color: $textLight;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+}
+
+.centered {
+  margin: 0 auto;
+}
