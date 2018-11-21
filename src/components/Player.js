@@ -9,7 +9,8 @@ class Player extends Component {
     let options = {
       width: '100%',
       height: '100%',
-      channel: 'moonmoon_ow',
+      channel: '',
+      autoplay: false,
     };
     twitchPlayer = new Twitch.Player("twitchEmbed", options);
   }
