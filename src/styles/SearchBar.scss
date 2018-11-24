@@ -1,0 +1,57 @@
+@import '../index.scss';
+
+.searchBar {
+  width: 90%;
+  margin: 0 auto 15px;
+  position: relative;
+}
+
+.searchBarInput {
+  background-color: $colDarkBG;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  color: $textLightAlt;
+  border: 1px solid transparent;
+  outline: none;
+
+  &:focus {
+    border: 1px solid $colMain;
+  }
+}
+
+.resultsList {
+  position: absolute;
+  z-index: 99;
+  text-align: left;
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  background-color: $textLightAlt;
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 120px;
+
+  & > li {
+    display: block;
+    cursor: pointer;
+    padding: 5px 8px;
+    transition: background-color 0.2s ease-out;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:hover {
+      background-color: white;
+    }
+
+    &:first-child {
+      padding-top: 10px;
+    }
+
+    &:last-child {
+      padding-bottom: 10px;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../styles/Player.module.scss';
+import '../styles/Player.scss';
 const Twitch = window.Twitch;
 let twitchPlayer;
 
@@ -23,10 +23,8 @@ class Player extends Component {
 
   render() {
     return (
-      <div className={styles.playerContainer}>
-        <div className={styles.playerRatioSetter}>
-          <div id="twitchEmbed" className={styles.player}>
-          </div>
+      <div className="playerRatioSetter">
+        <div id="twitchEmbed" className="player">
         </div>
       </div>
     );

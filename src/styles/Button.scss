@@ -1,0 +1,29 @@
+@import '../index.scss';
+
+.button {
+  background-color: $colMain;
+  color: $textLight;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 15px 10px;
+  border: none;
+  border-radius: 6px;
+  position: relative;
+  font-size: 18px;
+  font-weight: 700;
+  transition: background-color 0.2s ease-out;
+
+  @include dropShadow;
+
+  &:hover {
+    background-color: $colMainLite;
+  }
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.fullWidth {
+  width: 100%;
+}

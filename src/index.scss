@@ -1,0 +1,29 @@
+@import './styles/normalize.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+$colMain: #E47739;
+$colMainLite: #F2994A;
+$colBG: #333333;
+$colDarkBG: #232323;
+
+$textDark: #1d1d1d;
+$textLight: #ffffff;
+$textLightAlt: #dedede;
+
+$dropShadow: rgba(0, 0, 0, 0.25);
+
+@mixin dropShadow {
+  box-shadow: 0px 4px 4px $dropShadow;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: $colBG;
+}

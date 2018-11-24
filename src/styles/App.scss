@@ -1,0 +1,50 @@
+@import '../index.scss';
+
+.app {
+  text-align: center;
+  width: 100%;
+}
+
+.appHeader {
+  position: relative;
+  z-index: 99;
+  background-color: $colMain;
+  width: 100%;
+  color: #ffffff;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.appHeaderTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 auto;
+  letter-spacing: 1px;
+  & > span {
+    color: $textDark;
+  }
+}
+
+.app .button {
+  margin: 0 auto;
+}
+
+.mainContainer {
+  display: flex;
+}
+
+.playerContainer {
+  width: 75%;
+}
+
+.sidePanel {
+  margin-top: 20px;
+  width: 25%;
+  text-align: center;
+
+  .button {
+    width: 90%;
+  }
+}

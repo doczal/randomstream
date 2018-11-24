@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '../styles/Button.module.scss';
+import '../styles/Button.scss';
 
-const Button = ({ onClick, children, centered }) => (
+const Button = ({ onClick, children, centered, fullWidth }) => (
   <button
     className={
-      [styles.button,
-       centered ? styles.centered : '', 
+      ["button",
+       centered ? "centered" : '', 
       ].join(' ')}
     onClick={onClick}
   >

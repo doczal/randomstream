@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Player from './Player';
 import Button from './Button';
 import SearchBar from './SearchBar';
-import styles from '../styles/App.module.scss';
+import '../styles/App.scss';
 
 const headers = {
   'Client-ID': '9r7t0gpprpubh826mcd7gjg763uxdm',
@@ -28,10 +28,10 @@ class App extends Component {
   }
 
   onSearchChange = (title) => {
-    if(title.length > 2) {
-      if(timer) {
-        clearTimeout(timer);
-      }
+    if(timer) {
+      clearTimeout(timer);
+    }
+    if(title.length > 2) { 
       timer = setTimeout(
         () => { this.searchGames(title) },
         500
@@ -113,24 +113,32 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.app}>
-        <header className={styles.appHeader}>
-          random stream
+      <div className="app">
+        <header className="appHeader">
+          <h1 className="appHeaderTitle"><span>random</span>stream</h1>
         </header>
-        <SearchBar
-          games={this.state.games}
-          onGameSelect={this.onGameSelect}
-          onSearchChange={this.onSearchChange}
-        />
-        <Player 
-          channel={this.state.channel}
-        />
-        <Button
-          onClick={this.getRandomChannels}
-          centered
-        >
-          click
-        </Button>
+        <div className="mainContainer">
+          <div className="playerContainer">
+            <Player 
+              channel={this.state.channel}
+            />
+          </div>
+          <div className="sidePanel">
+            <SearchBar
+              games={this.state.games}
+              onGameSelect={this.onGameSelect}
+              onSearchChange={this.onSearchChange}
+            />
+            
+            <Button
+              onClick={this.getRandomChannels}
+              centered
+              fullWidth
+            >
+              Bring Me Another!
+            </Button>
+          </div>
+        </div>
       </div>
       
     );
