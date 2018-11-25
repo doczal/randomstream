@@ -6,6 +6,7 @@ import StreamList from './StreamList';
 import '../styles/App.scss';
 
 const headers = {
+  'Accept': 'application/vnd.twitchtv.v5+json',
   'Client-ID': '9r7t0gpprpubh826mcd7gjg763uxdm',
 };
 const streamsUrl = 'https://api.twitch.tv/kraken/streams/';
@@ -103,11 +104,11 @@ class App extends Component {
       console.log(data);
       const streams = data.streams;
       const channels = streams.map((stream) => {
-        const { channel, game, viewers, _id } = stream;
+        const { channel, game, viewers } = stream;
         return {
           name: channel.name,
           displayName: channel.display_name,
-          id: _id,
+          id: channel._id,
           game,
           url: channel.url,
           viewers,
@@ -123,29 +124,27 @@ class App extends Component {
     });
   }
 
-  getChannelByUser = (e, name) => {
-    e.preventDefault();
-    fetch(streamsUrl + '?game=' + this.state.game, {
+  getChannelByID = (id) => {
+    console.log(streamsUrl + id);
+    fetch(streamsUrl + id, {
       headers,
     })
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
-      const streams = data.streams;
-      const channels = streams.map((stream) => {
-        const { channel, game, viewers, _id } = stream;
-        return {
-          name: channel.name,
-          displayName: channel.display_name,
-          id: _id,
-          game,
-          url: channel.url,
-          viewers,
-        };
-      });
+      const stream = data.stream;
+      const { channel, game, viewers } = stream;
+      const newChannel = {
+        name: channel.name,
+        displayName: channel.display_name,
+        id: channel._id,
+        game,
+        url: channel.url,
+        viewers,
+      };
       this.setState({
-        channel: channels[0].name,
-        channels: [channels[0], ...this.state.channels],
+        channel: newChannel.name,
+        channels: [newChannel, ...this.state.channels],
       });
     })
     .catch(err => {
@@ -182,6 +181,7 @@ class App extends Component {
 
             <StreamList 
               channels={this.state.channels}
+              getChannelByID={this.getChannelByID}
             />
           </div>
         </div>
