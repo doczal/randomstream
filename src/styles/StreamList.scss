@@ -1,0 +1,67 @@
+@import '../index.scss';
+
+.streamListContainer {
+  flex-grow: 1;
+  position: relative;
+  margin-top: 20px;
+  border: 1px solid $colDarkBG;
+}
+
+.streamList {
+  margin: 0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  background-color: $colLightBG;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.streamerCard {
+  width: 100%;
+  border-style: solid;
+  border-color: $colDarkBG;
+  border-width: 0px 0px 1px 0px;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 8px;
+  align-items: center;
+}
+
+.streamerInfo {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $textLightAlt;
+
+  h2 {
+    font-size: 14px;
+    margin: 0;
+
+    a {
+      color: $textLightAlt;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  span {
+    font-size: 11px;
+    color: $textLightAlt2;
+  }
+}
+
+.streamInfo {
+  white-space: nowrap;
+  color: $textLightAlt2;
+  font-size: 12px;
+  margin-left: 10px;
+}

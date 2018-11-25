@@ -34,16 +34,22 @@
 
 .mainContainer {
   display: flex;
+  align-items: stretch;
 }
 
 .playerContainer {
   padding: 20px;
-  width: 75%;
+  width: 70%;
 }
 
 .sidePanel {
-  margin-top: 25px;
-  width: 25%;
+  //margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  width: 30%;
   text-align: center;
   padding-right: 15px;
 
