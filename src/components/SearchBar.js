@@ -20,32 +20,36 @@ class SearchBar extends Component {
   }
 
   handleSelect = (e) => {
-    this.props.onGameSelect(e.target.dataset.name);
+    const game = e.target.dataset.name;
+    this.setState({
+      value: game
+    });
+    this.props.onGameSelect(game);
   }
 
   render() {
     const games = this.props.games;
+    const focus = this.state.focus;
     return(
       <div className="searchBar">
         <input
+          placeholder="Game or Category..."
           className="searchBarInput"
           value={this.state.value}
           onChange={this.handleChange}
           onFocus={() => {this.setState({focus: true});}}
           onBlur={() => {this.setState({focus: false});}}
         />
-        {
-          this.state.focus ?
-          <ul className="resultsList">
-            {
-              games.map(game => (
-                <li onClick={this.handleSelect} data-name={game.name} key={game.id}>{game.name}</li>
-              ))
-            }
-          </ul> :
-          null
-        }
-        
+        <ul className={[
+          "resultsList",
+          focus ? "" : "hidden",
+        ].join(" ")} >
+          {
+            games.map(game => (
+              <li onMouseDown={this.handleSelect} data-name={game.name} key={game.id}>{game.name}</li>
+            ))
+          }
+        </ul>
       </div>
     )
   }
