@@ -144,7 +144,10 @@ class App extends Component {
       };
       this.setState({
         channel: newChannel.name,
-        channels: [newChannel, ...this.state.channels],
+        channels: [
+          newChannel, 
+          ...this.state.channels.filter((c) => c.id !== newChannel.id)
+        ],
       });
     })
     .catch(err => {
