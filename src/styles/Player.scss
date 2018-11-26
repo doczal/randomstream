@@ -5,6 +5,7 @@
   height: 0;
   padding-top: 56.25%;
   position: relative;
+  border: 1px solid $colMain;
 }
 
 .player {
@@ -13,5 +14,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border: 1px solid $colMain;
+  opacity: 1;
+  transition: opacity 0.2s ease-out; 
+}
+
+.hidden {
+  opacity: 0;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Player.scss';
+import Loader from './Loader';
 const Twitch = window.Twitch;
 let twitchPlayer;
 
@@ -22,9 +23,15 @@ class Player extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     return (
       <div className="playerRatioSetter">
-        <div id="twitchEmbed" className="player">
+        {
+          isLoading ?
+          <Loader /> :
+          null
+        }
+        <div id="twitchEmbed" className={`player ${isLoading ? 'hidden' : ''}`}>
         </div>
       </div>
     );

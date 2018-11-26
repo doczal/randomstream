@@ -23,7 +23,7 @@ class App extends Component {
       games: [],
       channel: '',
       channels: [],
-      status: ''
+      isLoading: true,
     };
   }
 
@@ -32,11 +32,6 @@ class App extends Component {
     window.addEventListener("resize", this.updateSidePanelHeight);
     playerContainer = document.querySelector(".playerContainer");
     sidePanel = document.querySelector(".sidePanel");
-    this.updateSidePanelHeight();
-  }
-
-  updateSidePanelHeight = () => {
-    //sidePanel.style.maxHeight = playerContainer.offsetHeight + "px";
   }
 
   onSearchChange = (title) => {
@@ -85,6 +80,9 @@ class App extends Component {
   }
 
   getRandomChannel = () => {
+    this.setState({
+      isLoading: true,
+    });
     fetch(streamsUrl + '?game=' + this.state.game, {
       headers,
     })
@@ -117,6 +115,7 @@ class App extends Component {
       this.setState({
         channel: channels[0].name,
         channels: [channels[0], ...this.state.channels],
+        isLoading: false,
       });
     })
     .catch(err => {
@@ -125,7 +124,9 @@ class App extends Component {
   }
 
   getChannelByID = (id) => {
-    console.log(streamsUrl + id);
+    this.setState({
+      isLoading: true,
+    });
     fetch(streamsUrl + id, {
       headers,
     })
@@ -148,6 +149,7 @@ class App extends Component {
           newChannel, 
           ...this.state.channels.filter((c) => c.id !== newChannel.id)
         ],
+        isLoading: false,
       });
     })
     .catch(err => {
@@ -163,7 +165,8 @@ class App extends Component {
         </header>
         <div className="mainContainer">
           <div className="playerContainer">
-            <Player 
+            <Player
+              isLoading={this.state.isLoading}  
               channel={this.state.channel}
             />
           </div>
