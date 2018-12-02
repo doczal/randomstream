@@ -5,6 +5,12 @@
   position: relative;
   margin-top: 20px;
   border: 1px solid $colDarkBG;
+
+  @media screen and (max-width: $screenMd) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .streamList {
@@ -19,6 +25,11 @@
   background-color: $colLightBG;
   height: 100%;
   overflow-y: scroll;
+
+  @media screen and (max-width: $screenMd) {
+    min-height: 30vh;
+    position: relative;
+  }
 }
 
 .streamerCard {

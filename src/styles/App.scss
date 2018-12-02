@@ -35,12 +35,23 @@
 .mainContainer {
   display: flex;
   align-items: stretch;
+
+  @media screen and (max-width: $screenMd) {
+    flex-direction: column;
+  }
 }
+
+
 
 .playerContainer {
   position: relative;
   padding: 20px;
   width: 70%;
+
+  @media screen and (max-width: $screenMd) {
+    width: 100%;
+    padding: 10px;
+  }
 }
 
 .sidePanel {
@@ -53,6 +64,11 @@
   width: 30%;
   text-align: center;
   padding-right: 15px;
+
+  @media screen and (max-width: $screenMd) {
+    width: 100%;
+    padding: 15px 0px 20px 0px;
+  }
 
   .button {
     width: 90%;

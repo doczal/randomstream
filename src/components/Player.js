@@ -23,15 +23,18 @@ class Player extends Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    console.log('player render');
+    const { isLoading, error } = this.props;
+    let display = null;
+    if(error) {
+      display = <div className="errorMessage">Error: {error.message}</div>;
+    } else if (isLoading) {
+      display = <Loader />;
+    }
     return (
       <div className="playerRatioSetter">
-        {
-          isLoading ?
-          <Loader /> :
-          null
-        }
-        <div id="twitchEmbed" className={`player ${isLoading ? 'hidden' : ''}`}>
+        {display}
+        <div id="twitchEmbed" className={`player ${isLoading || error ? 'hidden' : ''}`}>
         </div>
       </div>
     );

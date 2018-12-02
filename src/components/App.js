@@ -24,6 +24,7 @@ class App extends Component {
       channel: '',
       channels: [],
       isLoading: true,
+      error: null,
     };
   }
 
@@ -75,12 +76,16 @@ class App extends Component {
       });
     })
     .catch(err => {
+      this.setState({
+        games: [],
+      });
       console.log(err);
     });
   }
 
   getRandomChannel = () => {
     this.setState({
+      error: null,
       isLoading: true,
     });
     fetch(streamsUrl + '?game=' + this.state.game, {
@@ -88,18 +93,19 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      //gotta check if total is 0
-      let total = data._total;// - 100;
-      console.log(total);
+      let total = data._total;
+      if(total === 0) {
+        throw new Error('No streams found.');
+      }
       let offset = Math.floor(Math.random() * Math.floor(total));
-      console.log(offset);
+      //console.log(offset);
       return fetch(streamsUrl + '?limit=1&offset=' + offset + '&game=' + this.state.game, {
         headers,
       });
     })
     .then(resp => resp.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       const streams = data.streams;
       const channels = streams.map((stream) => {
         const { channel, game, viewers } = stream;
@@ -119,12 +125,15 @@ class App extends Component {
       });
     })
     .catch(err => {
-      console.log('error:', err);
+      this.setState({
+        error: err,
+      });
     });
   }
 
   getChannelByID = (id) => {
     this.setState({
+      error: null,
       isLoading: true,
     });
     fetch(streamsUrl + id, {
@@ -132,7 +141,12 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      console.log(data);
+      //console.log(data.stream);
+      if(data.stream === undefined) {
+        throw new Error('Channel does not exist.');
+      } else if(data.stream === null) {
+        throw new Error('Channel is offline.');
+      }
       const stream = data.stream;
       const { channel, game, viewers } = stream;
       const newChannel = {
@@ -153,6 +167,9 @@ class App extends Component {
       });
     })
     .catch(err => {
+      this.setState({
+        error: err,
+      });
       console.log('error:', err);
     });
   }
@@ -168,6 +185,7 @@ class App extends Component {
             <Player
               isLoading={this.state.isLoading}  
               channel={this.state.channel}
+              error={this.state.error}
             />
           </div>
           <div className="sidePanel">
