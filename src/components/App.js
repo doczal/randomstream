@@ -12,8 +12,6 @@ const headers = {
 const streamsUrl = 'https://api.twitch.tv/kraken/streams/';
 const gamesUrl = 'https://api.twitch.tv/kraken/search/games/?type=suggest';
 let timer;
-let playerContainer;
-let sidePanel;
 
 class App extends Component {
   constructor(props) {
@@ -32,8 +30,16 @@ class App extends Component {
   componentDidMount() {
     this.getRandomChannel();
     window.addEventListener("resize", this.updateSidePanelHeight);
-    playerContainer = document.querySelector(".playerContainer");
-    sidePanel = document.querySelector(".sidePanel");
+    if(localStorage.getItem('streamsWatched')) {
+      this.setState({
+        streamsWatched: parseInt(localStorage.getItem('streamsWatched'), 10),
+      });
+    }
+    if(localStorage.getItem('channels')) {
+      this.setState({
+        channels: JSON.parse(localStorage.getItem('channels')),
+      });
+    }
   }
 
   onSearchChange = (title) => {
@@ -129,7 +135,10 @@ class App extends Component {
         channels: [channels[0], ...this.state.channels],
         isLoading: false,
         streamsWatched: prevState.streamsWatched + 1,
-      }));
+      }), () => {
+        localStorage.setItem('streamsWatched', this.state.streamsWatched);
+        localStorage.setItem('channels', JSON.stringify(this.state.channels));
+      });
     })
     .catch(err => {
       this.setState({
@@ -171,6 +180,8 @@ class App extends Component {
           ...this.state.channels.filter((c) => c.id !== newChannel.id)
         ],
         isLoading: false,
+      }, () => {
+        localStorage.setItem('channels', JSON.stringify(this.state.channels));
       });
     })
     .catch(err => {
