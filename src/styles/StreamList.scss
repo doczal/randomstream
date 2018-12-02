@@ -3,7 +3,6 @@
 .streamListContainer {
   flex-grow: 1;
   position: relative;
-  margin-top: 20px;
   border: 1px solid $colDarkBG;
 
   @media screen and (max-width: $screenMd) {
@@ -26,8 +25,8 @@
   height: 100%;
   overflow-y: scroll;
 
-  @media screen and (max-width: $screenMd) {
-    min-height: 30vh;
+  @media screen and (max-width: $screenSm) {
+    height: 25vh;
     position: relative;
   }
 }

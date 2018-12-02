@@ -25,6 +25,7 @@ class App extends Component {
       channels: [],
       isLoading: true,
       error: null,
+      streamsWatched: 0,
     };
   }
 
@@ -45,6 +46,11 @@ class App extends Component {
         500
       );
     } else {
+      if(title.length === 0) { 
+        this.setState({
+          game: '',
+        });
+      }
       this.setState({
         games: [],
       });
@@ -118,11 +124,12 @@ class App extends Component {
           viewers,
         };
       });
-      this.setState({
+      this.setState((prevState) => ({
         channel: channels[0].name,
         channels: [channels[0], ...this.state.channels],
         isLoading: false,
-      });
+        streamsWatched: prevState.streamsWatched + 1,
+      }));
     })
     .catch(err => {
       this.setState({
@@ -175,11 +182,13 @@ class App extends Component {
   }
 
   render() {
+    const { streamsWatched, game } = this.state;
     return (
       <div className="app">
         <header className="appHeader">
           <h1 className="appHeaderTitle"><span>random</span>stream</h1>
         </header>
+        <h2 className="categoryTitle">{`Current Category:`} <span>{`${ game === '' ? 'All' : game}`}</span></h2>
         <div className="mainContainer">
           <div className="playerContainer">
             <Player
@@ -200,9 +209,9 @@ class App extends Component {
               centered
               fullWidth
             >
-              Bring Me Another
+              Next Stream
             </Button>
-
+            <h3 className="streamsWatched"><span>{`${streamsWatched}`}</span>{` stream${streamsWatched > 1 || streamsWatched === 0 ? 's' : ''} watched`}</h3>
             <StreamList 
               channels={this.state.channels}
               getChannelByID={this.getChannelByID}

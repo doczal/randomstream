@@ -32,25 +32,58 @@
   margin: 0 auto;
 }
 
-.mainContainer {
-  display: flex;
-  align-items: stretch;
+.categoryTitle {
+  margin: 20px auto 0px auto;
+  font-size: 16px;
+  color: $textLightAlt;
+  font-weight: 400;
 
-  @media screen and (max-width: $screenMd) {
-    flex-direction: column;
+  & > span {
+    font-weight: 700;
+    color: $colMain;
+  }
+
+  @media screen and (max-width: $screenSm) {
+    margin-top: 15px;
+    margin-bottom: 5px;
   }
 }
 
+.mainContainer {
+  display: flex;
+  align-items: stretch;
+  max-width: 1800px;
+  margin: 0 auto;
 
-
+  @media screen and (max-width: $screenSm) {
+    flex-direction: column;
+  }
+}
 .playerContainer {
   position: relative;
   padding: 20px;
   width: 70%;
 
   @media screen and (max-width: $screenMd) {
+    width: 65%;
+  }
+
+  @media screen and (max-width: $screenSm) {
     width: 100%;
     padding: 10px;
+  }
+}
+
+.streamsWatched {
+  margin: 15px auto 10px;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  color: $textLightAlt;
+
+  & > span {
+    color: $colMain;
+    font-weight: 700;
   }
 }
 
@@ -66,6 +99,10 @@
   padding-right: 15px;
 
   @media screen and (max-width: $screenMd) {
+    width: 35%;
+  }
+
+  @media screen and (max-width: $screenSm) {
     width: 100%;
     padding: 15px 0px 20px 0px;
   }
