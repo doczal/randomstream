@@ -110,14 +110,15 @@ class App extends Component {
         throw new Error('No streams found.');
       }
       let offset = Math.floor(Math.random() * Math.floor(total));
-      //console.log(offset);
       return fetch(streamsUrl + '?limit=1&offset=' + offset + '&game=' + this.state.game, {
         headers,
       });
     })
     .then(resp => resp.json())
     .then(data => {
-      //console.log(data);
+      if(data.streams.length < 1) {
+        throw new Error("Whoops, we random'd too hard. Try again!");
+      }
       const streams = data.streams;
       const channels = streams.map((stream) => {
         const { channel, game, viewers } = stream;
@@ -130,11 +131,13 @@ class App extends Component {
           viewers,
         };
       });
+      // Check if channel has been viewed before
+      const prevChannel = this.state.channels.map((channel) => channel.id).includes(channels[0].id);
       this.setState((prevState) => ({
         channel: channels[0].name,
-        channels: [channels[0], ...this.state.channels],
+        channels: [channels[0], ...this.state.channels.filter((c) => c.id !== channels[0].id)],
         isLoading: false,
-        streamsWatched: prevState.streamsWatched + 1,
+        streamsWatched: prevChannel ? prevState.streamsWatched : prevState.streamsWatched + 1,
       }), () => {
         localStorage.setItem('streamsWatched', this.state.streamsWatched);
         localStorage.setItem('channels', JSON.stringify(this.state.channels));
@@ -199,7 +202,7 @@ class App extends Component {
         <header className="appHeader">
           <h1 className="appHeaderTitle"><span>random</span>stream</h1>
         </header>
-        <h2 className="categoryTitle">{`Current Category:`} <span>{`${ game === '' ? 'All' : game}`}</span></h2>
+        <h2 className="categoryTitle">{`Current Game:`} <span>{`${ game === '' ? 'All' : game}`}</span></h2>
         <div className="mainContainer">
           <div className="playerContainer">
             <Player
