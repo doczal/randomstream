@@ -23,7 +23,6 @@ class Player extends Component {
   }
 
   render() {
-    console.log('player render');
     const { isLoading, error } = this.props;
     let display = null;
     if(error) {

@@ -9,7 +9,7 @@ class StreamList extends Component {
   }
 
   render() {
-    const { channels, streamsWatched } = this.props;
+    const { channels } = this.props;
     return (
       <div className="streamListContainer">
         <ul className="streamList">

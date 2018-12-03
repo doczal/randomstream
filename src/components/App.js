@@ -82,7 +82,6 @@ class App extends Component {
           id: _id,
         };
       });
-      console.log(games);
       this.setState({
         games,
       });
@@ -91,7 +90,6 @@ class App extends Component {
       this.setState({
         games: [],
       });
-      console.log(err);
     });
   }
 
@@ -160,7 +158,6 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      //console.log(data.stream);
       if(data.stream === undefined) {
         throw new Error('Channel does not exist.');
       } else if(data.stream === null) {
@@ -191,7 +188,6 @@ class App extends Component {
       this.setState({
         error: err,
       });
-      console.log('error:', err);
     });
   }
 
